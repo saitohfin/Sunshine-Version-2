@@ -15,6 +15,7 @@
  */
 package com.example.android.sunshine.app;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,8 +26,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -100,12 +103,20 @@ public class ForecastFragment extends Fragment {
                         R.id.list_item_forecast_textview, // The ID of the textview to populate.
                         weekForecast);
 
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Get a reference to the ListView, and attach this adapter to it.
         ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
         listView.setAdapter(mForecastAdapter);
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = mForecastAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("forecast", item);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
