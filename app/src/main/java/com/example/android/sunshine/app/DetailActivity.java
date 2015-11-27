@@ -35,7 +35,7 @@ public class DetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_detail);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new DetailFragment())
                     .commit();
         }
     }
@@ -57,31 +57,20 @@ public class DetailActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
+        if(id == R.id.menu_item_share){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            TextView textView = (TextView) findViewById(R.id.detailInformation);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, textView.getText());
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        }
+
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            Intent intent = getActivity().getIntent();
-            String item = intent.getStringExtra("forecast");
-            TextView textView = (TextView) rootView.findViewById(R.id.detailInformation);
-            textView.setText(item);
-
-            return rootView;
-        }
     }
 }

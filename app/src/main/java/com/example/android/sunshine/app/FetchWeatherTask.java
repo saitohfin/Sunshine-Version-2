@@ -50,7 +50,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
             // http://openweathermap.org/API#forecast
             final String query = params[0];
             final String mode = "json";
-            final String unit = "metric";
+            final String unit = params[1];
             final Integer numDays = 7;
             Uri uri = Uri.parse(FORECAST_URLBASE).buildUpon().
                     appendQueryParameter(QUERY_PARAM, query).

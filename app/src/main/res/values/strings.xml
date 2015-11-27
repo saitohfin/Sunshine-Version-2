@@ -19,5 +19,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="setting_activity">Settings</string>
+    <string name="pref_location_key" translatable="false">location</string>
+    <string name="pref_location_label">Preference location</string>
+    <string name="pref_location_default" translatable="false">46100</string>
+    <string name="pref_metric" translatable="false">pref_metric</string>
+    <string name="your_location" >Your location is</string>
+    <string name="action_share">Share</string>
 
 </resources>
